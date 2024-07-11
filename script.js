@@ -5,7 +5,7 @@ let catcher, fallingObject;
 let score=0;
 let bgImage,catchImage,fallImage;
 let myFont;
-let rules ="Move the \ncatcher with the \nleft and right \narrow keys to \ncatch the falling \nobjects."
+let rules ="Move the \nbasket with the \nleft and right \narrow keys to \ncatch 20\nraspberries."
 
 /* PRELOAD LOADS FILES */
 function preload(){
@@ -19,23 +19,27 @@ function preload(){
 function setup() {
   createCanvas(400,400);
   
+ 
   //Create catcher 
-  catcher = new Sprite(200,380,100,20,"k");
+  catcher = new Sprite(catchImage,200,360,100,6,"k");
   catcher.color = color(95,158,160);
+  //resize image
+  catchImage.resize(100,150)
   
   //Create falling object
-  fallingObject = new Sprite(100,0,10);
+  fallingObject = new Sprite(fallImage,100,0,10);
   fallingObject.color = color(0,128,128);
+  fallingObject.rotationLock = true;
   fallingObject.vel.y=2;
+  fallImage.resize(60,30)
   
-
+  
 }
 
 /* DRAW LOOP REPEATS */
 function draw() {
-  background(bgImage);
+  background(bgImage)
 
-  
 
   //if falling obj reaches bottom, move back to top
   if(fallingObject.y>=height+10)
@@ -119,6 +123,8 @@ function draw() {
     text(rules, width-100, 20);
     
   }
+
+  //allSprites.debug=mouse.pressing()
   
 }
 
@@ -132,8 +138,11 @@ function youWin()
     //winning screen
     textAlign(CENTER)
     textSize(30)
+    stroke("white")
+    strokeWeight(10)
     text("Goal Reached!",width/2,height/2)
     textSize(20)
+    noStroke()
     text("click to restart", width/2, height/2+50);
   restart();
 }
@@ -143,7 +152,7 @@ function restart()
   if(mouseIsPressed)
     {
       score=0
-      catcher.pos={x:200,y:380}
+      catcher.pos={x:200,y:360}
       fallingObject.pos={x:100,y:0}
       fallingObject.vel.y=2
     }
