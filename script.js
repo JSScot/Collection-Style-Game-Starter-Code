@@ -3,11 +3,16 @@
 /* VARIABLES */
 let catcher, fallingObject;
 let score=0;
+let bgImage,catchImage,fallImage;
+let myFont;
 let rules ="Move the \ncatcher with the \nleft and right \narrow keys to \ncatch the falling \nobjects."
 
 /* PRELOAD LOADS FILES */
 function preload(){
-  
+  bgImage = loadImage("assets/flowers.jpg")
+  catchImage = loadImage("assets/basket.jpg")
+  fallImage = loadImage("assets/raspberry.jpg")
+  //myFont = loadFont("")
 }
 
 /* SETUP RUNS ONCE */
@@ -28,7 +33,7 @@ function setup() {
 
 /* DRAW LOOP REPEATS */
 function draw() {
-  background(224,224,224);
+  background(bgImage);
 
   
 
@@ -38,17 +43,17 @@ function draw() {
     score--
     fallingObject.y=0;
     fallingObject.x= random(width-30);
-    fallingObject.vel.y=random(5,10);
+    fallingObject.vel.y=random(6,15);
   }
 
   //move catcher
   if(kb.pressing("left"))
   {
-    catcher.vel.x= -6
+    catcher.vel.x= -7
   }
   else if (kb.pressing("right"))
     {
-      catcher.vel.x= 6
+      catcher.vel.x= 7
     }
   else
   {
@@ -69,7 +74,7 @@ function draw() {
   {
     fallingObject.y=0;
     fallingObject.x= random(width-30);
-    fallingObject.vel.y=random(5,10);
+    fallingObject.vel.y=random(6,15);
     fallingObject.direction="down"
     //increases score
     score++
@@ -79,27 +84,38 @@ function draw() {
   if(score<0)
   {
     //moves catcher and object off screen
+    noStroke()
     catcher.pos={x:-100,y:-100}
     fallingObject.pos={x:-250,y:-250}
     //losing screen
     textAlign(CENTER)
     textSize(30)
+    stroke("white")
+    strokeWeight(10)
     text("Do better",width/2,height/2)
     textSize(20)
-    text("Reload to start", width/2, height/2+50);
+    stroke("white")
+    strokeWeight(5)
+    text("Click to restart", width/2, height/2+50);
+     restart();
   }
-  else if(score==10)
+  else if(score==20)
   {
    youWin()
   }
   else
   {
     //displays score
+    textAlign(LEFT)
     textSize(20)
+    //textFont()
+    stroke("white")
+    strokeWeight(10)
     text("Score = "+ score,10,40)
     // Draw directions to screen
     fill(0);
-    textSize(13);
+    noStroke()
+    textSize(14);
     text(rules, width-100, 20);
     
   }
@@ -124,19 +140,11 @@ function youWin()
 
 function restart()
 {
-  /*if(mouseIsPressed)
+  if(mouseIsPressed)
     {
       score=0
       catcher.pos={x:200,y:380}
       fallingObject.pos={x:100,y:0}
       fallingObject.vel.y=2
-      //displays score
-      textSize(20)
-      text("Score = "+ score,10,40)
-      // Draw directions to screen
-      fill(0);
-      textSize(13);
-      text(rules, width-100, 20);
-    }*/
-  
+    }
 }
