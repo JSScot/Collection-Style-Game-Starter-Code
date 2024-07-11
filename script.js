@@ -5,14 +5,16 @@ let catcher, fallingObject;
 let score=0;
 let bgImage,catchImage,fallImage;
 let myFont;
-let rules ="Move the \nbasket with the \nleft and right \narrow keys to \ncatch 20\nraspberries."
+let myFont2;
+let rules ="Move the \nbasket with \nthe left and \nright arrow \nkeys to catch\n 20 raspberries."
 
 /* PRELOAD LOADS FILES */
 function preload(){
   bgImage = loadImage("assets/flowers.jpg")
   catchImage = loadImage("assets/basket.jpg")
   fallImage = loadImage("assets/raspberry.jpg")
-  //myFont = loadFont("")
+  myFont = loadFont("fonts/Handjet-VariableFont_ELGR,ELSH,wght.ttf")
+  myFont2 = loadFont("fonts/PixelifySans-VariableFont_wght.ttf")
 }
 
 /* SETUP RUNS ONCE */
@@ -30,7 +32,7 @@ function setup() {
   fallingObject = new Sprite(fallImage,100,0,10);
   fallingObject.color = color(0,128,128);
   fallingObject.rotationLock = true;
-  fallingObject.vel.y=2;
+  fallingObject.vel.y=6;
   fallImage.resize(60,30)
   
   
@@ -46,18 +48,18 @@ function draw() {
   {
     score--
     fallingObject.y=0;
-    fallingObject.x= random(width-30);
-    fallingObject.vel.y=random(6,15);
+    fallingObject.x= random(300,width-30);
+    fallingObject.vel.y=random(10,20);
   }
 
   //move catcher
   if(kb.pressing("left"))
   {
-    catcher.vel.x= -7
+    catcher.vel.x= -10
   }
   else if (kb.pressing("right"))
     {
-      catcher.vel.x= 7
+      catcher.vel.x= 10
     }
   else
   {
@@ -78,7 +80,7 @@ function draw() {
   {
     fallingObject.y=0;
     fallingObject.x= random(width-30);
-    fallingObject.vel.y=random(6,15);
+    fallingObject.vel.y=random(10,20);
     fallingObject.direction="down"
     //increases score
     score++
@@ -94,6 +96,7 @@ function draw() {
     //losing screen
     textAlign(CENTER)
     textSize(30)
+    textFont(myFont)
     stroke("white")
     strokeWeight(10)
     text("Do better",width/2,height/2)
@@ -115,12 +118,14 @@ function draw() {
     //textFont()
     stroke("white")
     strokeWeight(10)
+    textFont(myFont2)
     text("Score = "+ score,10,40)
     // Draw directions to screen
     fill(0);
     noStroke()
-    textSize(14);
-    text(rules, width-100, 20);
+    textSize(15);
+    textFont(myFont2)
+    text(rules, width-120, 20);
     
   }
 
@@ -140,9 +145,11 @@ function youWin()
     textSize(30)
     stroke("white")
     strokeWeight(10)
+    textFont(myFont)
     text("Goal Reached!",width/2,height/2)
     textSize(20)
-    noStroke()
+    stroke("white")
+    strokeWeight(5)
     text("click to restart", width/2, height/2+50);
   restart();
 }
@@ -154,6 +161,6 @@ function restart()
       score=0
       catcher.pos={x:200,y:360}
       fallingObject.pos={x:100,y:0}
-      fallingObject.vel.y=2
+      fallingObject.vel.y=6
     }
 }
