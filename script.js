@@ -8,10 +8,11 @@ let raspB, lemon, peach, straw,cherry,banana;
 let fruit;
 //fonts
 let myFont;
+let start = false;
 let myFont2;
 //velocity of falling objects
-let minVel=6;
-let maxVel=11;
+let minVel=4;
+let maxVel=12;
 let rules ="Use the \narrow keys to \ncatch 20 fruits \n\nLEMONS ARE BAD\nlet them drop"
 
 /* PRELOAD LOADS FILES */
@@ -46,13 +47,15 @@ function setup() {
   fallingObject = new Sprite(raspB,100,0,10);
   fallingObject.color = color(0,128,128);
   fallingObject.rotationLock = true;
-  fallingObject.vel.y=2;
+  fallingObject.vel.y=0;
   raspB.resize(60,30)
-  lemon.resize(40,40)
+  lemon.resize(50,50)
   peach.resize(50,50)
   straw.resize(35,35)
   cherry.resize(35,45)
   banana.resize(65,55)
+  
+
   
   
 }
@@ -61,7 +64,23 @@ function setup() {
 function draw() {
   background(bgImage)
 
+  if(start==false)
+  {
+    textAlign(CENTER);
+    textSize(20);
+    stroke("white");
+    strokeWeight(10);
+    textFont(myFont2);
+    text("click to start", width / 2, height / 2);
+  }
 
+  if(mouseIsPressed)
+    {
+      if(start==false)
+      fallingObject.vel.y=3;
+      start = true;
+      
+    }
   //if falling obj reaches bottom, move back to top
   if(fallingObject.y>=height+10)
   {
