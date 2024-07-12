@@ -59,11 +59,22 @@ function draw() {
   //if falling obj reaches bottom, move back to top
   if(fallingObject.y>=height+10)
   {
+    if(fallingObject.image==lemon)
+      {
+        //doesn't affect store if you drop lemon
+        fallingObject.y=0;
+        fallingObject.image=random(fruits)
+        fallingObject.x= random(300,width-30);
+        fallingObject.vel.y=random(5,10);
+      }
+    else
+    {
     score--
     fallingObject.y=0;
     fallingObject.image=random(fruits)
     fallingObject.x= random(300,width-30);
     fallingObject.vel.y=random(5,10);
+    }
   }
 
   //move catcher
@@ -92,13 +103,28 @@ function draw() {
   //if falling object collides with catcher,goes back to top in raondom position
   if(fallingObject.collides(catcher))
   {
+    if(fallingObject.image==lemon)
+    {
+      //takes off a point for lemons
+      score--
+      fallingObject.y=0;
+      //random fruit
+      fallingObject.image=random(fruits)
+      fallingObject.x= random(width-30);
+      fallingObject.vel.y=random(5,10);
+      fallingObject.direction="down"
+    }
+    else{
+    
     fallingObject.y=0;
+      //random fruit
     fallingObject.image=random(fruits)
     fallingObject.x= random(width-30);
     fallingObject.vel.y=random(5,10);
     fallingObject.direction="down"
     //increases score
     score++
+    }
   }
   
 
