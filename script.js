@@ -6,9 +6,13 @@ let score=0;
 let bgImage,catchImage,fallImage;
 let raspB, lemon, peach, straw,cherry,banana;
 let fruit;
+//fonts
 let myFont;
 let myFont2;
-let rules ="Use the \narrow keys to \ncatch fruits \n\nLEMONS ARE BAD\nlet them drop"
+//velocity of falling objects
+let minVel=6;
+let maxVel=11;
+let rules ="Use the \narrow keys to \ncatch 20 fruits \n\nLEMONS ARE BAD\nlet them drop"
 
 /* PRELOAD LOADS FILES */
 function preload(){
@@ -67,7 +71,7 @@ function draw() {
         fallingObject.y=0;
         fallingObject.image=random(fruits)
         fallingObject.x= random(300,width-30);
-        fallingObject.vel.y=random(5,10);
+        fallingObject.vel.y=random(minVel,maxVel);
       }
     else
     {
@@ -75,7 +79,7 @@ function draw() {
     fallingObject.y=0;
     fallingObject.image=random(fruits)
     fallingObject.x= random(300,width-30);
-    fallingObject.vel.y=random(5,10);
+    fallingObject.vel.y=random(minVel,maxVel);
     }
   }
 
@@ -113,7 +117,7 @@ function draw() {
       //random fruit
       fallingObject.image=random(fruits)
       fallingObject.x= random(width-30);
-      fallingObject.vel.y=random(5,10);
+      fallingObject.vel.y=random(minVel,maxVel);
       fallingObject.direction="down"
     }
     else{
@@ -122,7 +126,7 @@ function draw() {
       //random fruit
     fallingObject.image=random(fruits)
     fallingObject.x= random(width-30);
-    fallingObject.vel.y=random(5,10);
+    fallingObject.vel.y=random(minVel,maxVel);
     fallingObject.direction="down"
     //increases score
     score++
