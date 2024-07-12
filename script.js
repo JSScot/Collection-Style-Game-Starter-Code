@@ -4,11 +4,11 @@
 let catcher, fallingObject;
 let score=0;
 let bgImage,catchImage,fallImage;
-let raspB, lemon, peach, straw,cherry;
+let raspB, lemon, peach, straw,cherry,banana;
 let fruit;
 let myFont;
 let myFont2;
-let rules ="Move the \nbasket with \nthe left and \nright arrow \nkeys to catch\n 20 raspberries."
+let rules ="Use the \narrow keys to \ncatch fruits \n\nLEMONS ARE BAD\nlet them drop"
 
 /* PRELOAD LOADS FILES */
 function preload(){
@@ -20,6 +20,7 @@ function preload(){
   peach = loadImage("assets/peach.jpg")
   straw = loadImage("assets/strawberry.jpg")
   cherry = loadImage("assets/cherry.jpg")
+  banana = loadImage("assets/banana.jpg")
   myFont = loadFont("fonts/Handjet-VariableFont_ELGR,ELSH,wght.ttf")
   myFont2 = loadFont("fonts/PixelifySans-VariableFont_wght.ttf")
 }
@@ -28,7 +29,7 @@ function preload(){
 function setup() {
   createCanvas(400,400);
 
-  fruits = [raspB,lemon,peach,cherry,straw]
+  fruits = [raspB,lemon,peach,cherry,straw,banana]
   
  
   //Create catcher 
@@ -41,12 +42,13 @@ function setup() {
   fallingObject = new Sprite(raspB,100,0,10);
   fallingObject.color = color(0,128,128);
   fallingObject.rotationLock = true;
-  fallingObject.vel.y=6;
+  fallingObject.vel.y=2;
   raspB.resize(60,30)
   lemon.resize(40,40)
   peach.resize(50,50)
   straw.resize(35,35)
   cherry.resize(35,45)
+  banana.resize(65,55)
   
   
 }
