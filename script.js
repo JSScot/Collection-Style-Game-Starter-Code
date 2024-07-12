@@ -4,6 +4,8 @@
 let catcher, fallingObject;
 let score=0;
 let bgImage,catchImage,fallImage;
+let raspB, lemon, peach, straw,cherry;
+let fruit;
 let myFont;
 let myFont2;
 let rules ="Move the \nbasket with \nthe left and \nright arrow \nkeys to catch\n 20 raspberries."
@@ -12,7 +14,12 @@ let rules ="Move the \nbasket with \nthe left and \nright arrow \nkeys to catch\
 function preload(){
   bgImage = loadImage("assets/flowers.jpg")
   catchImage = loadImage("assets/basket.jpg")
-  fallImage = loadImage("assets/raspberry.jpg")
+  //falling object images
+  raspB = loadImage("assets/raspberry.jpg")
+  lemon = loadImage("assets/lemon.jpg")
+  peach = loadImage("assets/peach.jpg")
+  straw = loadImage("assets/strawberry.jpg")
+  cherry = loadImage("assets/cherry.jpg")
   myFont = loadFont("fonts/Handjet-VariableFont_ELGR,ELSH,wght.ttf")
   myFont2 = loadFont("fonts/PixelifySans-VariableFont_wght.ttf")
 }
@@ -20,6 +27,8 @@ function preload(){
 /* SETUP RUNS ONCE */
 function setup() {
   createCanvas(400,400);
+
+  fruits = [raspB,lemon,peach,cherry,straw]
   
  
   //Create catcher 
@@ -29,11 +38,15 @@ function setup() {
   catchImage.resize(100,150)
   
   //Create falling object
-  fallingObject = new Sprite(fallImage,100,0,10);
+  fallingObject = new Sprite(raspB,100,0,10);
   fallingObject.color = color(0,128,128);
   fallingObject.rotationLock = true;
   fallingObject.vel.y=6;
-  fallImage.resize(60,30)
+  raspB.resize(60,30)
+  lemon.resize(40,40)
+  peach.resize(50,50)
+  straw.resize(35,35)
+  cherry.resize(35,45)
   
   
 }
@@ -48,8 +61,9 @@ function draw() {
   {
     score--
     fallingObject.y=0;
+    fallingObject.image=random(fruits)
     fallingObject.x= random(300,width-30);
-    fallingObject.vel.y=random(10,20);
+    fallingObject.vel.y=random(5,10);
   }
 
   //move catcher
@@ -79,8 +93,9 @@ function draw() {
   if(fallingObject.collides(catcher))
   {
     fallingObject.y=0;
+    fallingObject.image=random(fruits)
     fallingObject.x= random(width-30);
-    fallingObject.vel.y=random(10,20);
+    fallingObject.vel.y=random(5,10);
     fallingObject.direction="down"
     //increases score
     score++
